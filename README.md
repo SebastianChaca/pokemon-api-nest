@@ -26,6 +26,12 @@ npm i -g @nest/cli
 docker-compose up -d
 ```
 
+5. DB Seed
+
+```
+http://localhost:3000/api/v1/seed
+```
+
 ## Stack
 
 - MongoDB
