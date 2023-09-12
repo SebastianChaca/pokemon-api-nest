@@ -44,3 +44,35 @@ http://localhost:3000/api/v1/seed
 
 - MongoDB
 - Nest
+
+# Production Build
+
+1. Crear archico `.env.prod` y llenar variables de entorno
+2. Crear imagen
+
+```
+docker-compose -f docker-compose.prod.yaml --env-file .env.prod up --build
+```
+
+# Development Build
+
+1. Crear archico `.env` y llenar variables de entorno
+2. Crear imagen
+
+```
+docker-compose -f docker-compose.dev.yaml --env-file .env up --build
+```
+
+Remover flag `--build` cuando se quiera levantar la imagen previamente construida
+
+# Nota
+
+Por defecto, docker-compose usa el archivo .env, por lo que si tienen el archivo .env y lo configuran con sus variables de entorno de producción, bastaría con
+
+```
+docker-compose -f docker-compose.prod.yaml up --build
+```
+
+```
+docker-compose -f docker-compose.dev.yaml up --build
+```
