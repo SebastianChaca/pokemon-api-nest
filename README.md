@@ -26,7 +26,15 @@ npm i -g @nest/cli
 docker-compose up -d
 ```
 
-5. DB Seed
+5. Clonar el archivo **.env.template\_** y renombrarlo como **.env\_** y llenar las variables
+
+6. Start app
+
+```
+npm run start:dev
+```
+
+8. DB Seed
 
 ```
 http://localhost:3000/api/v1/seed

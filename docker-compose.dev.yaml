@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  pokedexapp:
+    depends_on:
+      - db
+    build:
+      context: .
+      dockerfile: dockerfile.dev
+      target: dev
+    image: pokedex-docker
+    container_name: pokedexapp
+    restart: always # reiniciar el contenedor si se detiene
+    ports:
+      - '${PORT}:${PORT}'
+    # working_dir: /var/www/pokedex
+
+    environment:
+      MONGODB: ${MONGODB}
+      PORT: ${PORT}
+      DEFAULT_LIMIT: ${DEFAULT_LIMIT}
+    # Mount host directory to docker container to support watch mode
+    volumes:
+      - .:/usr/src/app
+      # This ensures that the NestJS container manages the node_modules folder
+      # rather than synchronizes it with the host machine
+      - /usr/src/app/node_modules
+
+    command: npm run start:dev
+
+  db:
+    image: mongo:5
+    container_name: mongo-poke
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      MONGODB_DATABASE: nest-pokemon
+    volumes:
+      - ./mongo:/data/db
